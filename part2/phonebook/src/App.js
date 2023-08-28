@@ -18,7 +18,7 @@ const App = () => {
     const exist = persons.find(person => person.name === newPerson.name)
 
     if (exist) {
-      if (window.confirm(`${newPerson.name} is already added to phonebookm replace old number with new number ?`)) {
+      if (window.confirm(`${newPerson.name} is already added to phonebook replace old number with new number ?`)) {
         personsService.update(exist.id, newPerson).then(response => {
           showNotification(`Updated ${newPerson.name}`, false)
           getPersons();
@@ -30,6 +30,8 @@ const App = () => {
     personsService.create(newPerson).then(response => {
       showNotification(`Added ${newPerson.name}`, false)
       getPersons();
+    }).catch(e => {
+      showNotification('Added failed', true)
     })
   }
 
